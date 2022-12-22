@@ -1,5 +1,6 @@
 [
 	{
+		"id": 1,
 		"title": "Rolls Royce",
 		"description": "Elegancia pura",
 		"price": 173900,
@@ -8,6 +9,7 @@
 		"code": 137
 	},
 	{
+		"id": 2,
 		"title": "Ford Mustang",
 		"description": "Potente americano",
 		"price": 78000,
@@ -16,6 +18,7 @@
 		"code": 138
 	},
 	{
+		"id": 3,
 		"title": "Porsche 911 Carrera",
 		"description": "Adrenalina sobre ruedas",
 		"price": 91700,
@@ -25,15 +28,6 @@
 	},
 	{
 		"id": 4,
-		"title": "Ferrari 458 Italia",
-		"description": "Elegancia y adrenalina",
-		"price": 190700,
-		"thumbnail": "imagen",
-		"stock": 6,
-		"code": 140
-	},
-	{
-		"id": 5,
 		"title": "Ferrari 458 Italia",
 		"description": "Elegancia y adrenalina",
 		"price": 190700,
