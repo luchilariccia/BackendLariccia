@@ -3,10 +3,105 @@ const manager = new ProductManager();
 const express = require ('express')
 const app = express();
 const products = require("./db/products.json")
+const users = [];
+
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
 
 app.listen(8080, () => {
     console.log("Server running")
 })
+
+
+//GET
+
+app.get('/api/users', (req, res) =>{
+    res.json({
+        status: "Success!",
+        data: users
+    })
+});
+
+app.get('/api/users/:userName', (req, res) =>{
+    const userFind = users.find (user => user.firstname === req.params.userName)
+    if (!userFind) {
+        res.status(404).json({
+            status: "Error",
+            data: "User not found"
+
+        })
+    }
+    res.json({
+        status: "Success!",
+        data: userFind
+    })
+});
+
+
+//DELETE
+
+app.delete('/api/users/:userName', (req, res) => {
+    const userIndex = users.findIndex (user => user.firstname === req.params.userName)
+    if (userIndex < 0){
+        return res.status(404).json({
+            status: "Error",
+            error: "User Not Found"
+        });
+    }
+    users.splice(userIndex);
+    console.log(users)
+    res.json({
+        status: "Success!",
+        data: "User deleted correctly"
+    })
+})
+
+//PUT
+
+app.put('/api/users/:userId', (req, res) => {
+    const newUser = req.body;
+    if (!newUser.firstname || !newUser.lastname){
+        return res.status(400).json({
+            status: "Error",
+            error: "Incomplete Values"
+        });
+    }
+    const userIndex = users.findIndex (user => user.fisrtname === req.params.userName)
+    if (userIndex < 0){
+        return res.status(404).json({
+            status: "Error",
+            error: "User Not Found"
+        });
+    }
+
+    users[userIndex] = newUser;
+    console.log(users);
+    res.json({
+        status: "Success!",
+        data: "User updates successfully"
+    })
+})
+
+//POST
+
+app.post('/api/users', (req, res) => {
+    const user = req.body;
+    console.log ("User => ", user);
+    if (!user.firstname || !user.lastname){
+        return res.status(400).json({
+            status: "Error",
+            error: "Incomplete Values"
+        });
+    }
+    users.push(user);
+    res.json({
+        status: "Success!",
+        data: user
+    })
+})
+
+//GET
 
 app.get ('/products', (req, res) => {
     console.log(req.query);
